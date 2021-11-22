@@ -26,7 +26,7 @@ import pandas_profiling as pp
 
 
 # Load Dataset
-df_emails = pd.read_csv("/Users/ayeshauzair/PycharmProjects/ML_AI_Bootcamp_Sp/Assignment13/spam_or_not_spam.csv")
+df_emails = pd.read_csv("spam_or_not_spam.csv")
 
 # Pandas Profiling
 # profile = pp.ProfileReport(df_emails)
@@ -64,8 +64,11 @@ y = df_emails['label']
 # Save Pickle Files for X and y
 f = open("X.pkl", "wb")
 pickle.dump(X, f)
+f.close()
+
 f = open("y.pkl", "wb")
 pickle.dump(y, f)
+f.close()
 
 # Creating corpus with 2873 (Max length of X) features from emails and applying regex
 corpus = []
@@ -101,11 +104,12 @@ print(cr)
 # Saving the trained model in pickle file
 f = open("model.pkl", "wb")
 pickle.dump(model, f)
+f.close()
 
 # Saving the transformed vectorizer in pickle file
 f = open("vectorizer.pkl", "wb")
 pickle.dump(vectorizer, f)
-
+f.close()
 
 # ---------------- Sample Testing ----------------
 
@@ -118,6 +122,7 @@ text_numeric = pickle.load(open("vectorizer.pkl", "rb"))
 sample_transform = text_numeric.transform(sample).toarray()
 
 # Step 3: Load Trained Model
+
 clf = pickle.load(open("model.pkl", "rb"))
 
 # Step 4: Perform prediction on transformed sample
@@ -129,20 +134,3 @@ if spam_detection == 0:
     print("Result: Not a spam email")
 else:
     print("Result: Spam email")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
